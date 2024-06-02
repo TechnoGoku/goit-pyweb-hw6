@@ -14,7 +14,7 @@ def insert_data(conn, sql_expression: str):
     c = conn.cursor()
     try:
         for _ in range(COUNT):
-            c.execute(sql_expression)
+            c.execute(sql_expression, (fake.name(), fake.email(), fake.password(), randint(19, 74)))
         conn.commit()
     except DatabaseError as e:
         logging.error(e)
