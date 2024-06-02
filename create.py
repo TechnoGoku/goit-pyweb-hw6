@@ -22,20 +22,23 @@ def create_table(conn, sql_expression: str):
 
 
 if __name__ == '__main__':
-    sql_create_projects_table = """
-    CREATE TABLE IF NOT EXISTS projects (
-     id integer PRIMARY KEY,
-     name text NOT NULL,
-     begin_date text,
+    sql_create_users_table = """
+    CREATE TABLE IF NOT EXISTS users (
+     id SERIAL PRIMARY KEY,
+     name VARCHAR(120),
+     email VARCHAR(120),
+     password VARCHAR(120),
+     age smallint CHECK (age > 18 AND age < 75),
      end_date text
     );
     """
 
-    with create_connection(database) as conn:
-        if conn is not None:
-            # create projects table
-            create_table(conn, sql_create_projects_table)
-            # create tasks table
-            create_table(conn, sql_create_tasks_table)
-        else:
-            print("Error! cannot create the database connection.")
+    try:
+        with create_connection() as conn:
+            if conn is not None:
+                # create projects table
+                create_table(conn, sql_create_users_table)
+            else:
+                print("Error! cannot create the database connection.")
+    except RuntimeError as err:
+        logging.error(err)
