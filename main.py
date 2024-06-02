@@ -5,7 +5,11 @@ import random
 import psycopg2
 from psycopg2 import DatabaseError
 
-fake = Faker()
+
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
+fake = Faker("uk_UA")
+
 
 conn = psycopg2.connect(host="localhost", database="hw6", user="postgres", password="567234")
 cur = conn.cursor()
@@ -22,7 +26,7 @@ for teacher_id in range(1, 4):
 
 for group_id in range(1, 4):
     for _ in range(10):
-        cur.execute("INSERT INTO students (full_name, group_id) VALUES (%s, %s) RETURNING id", (fake.name(), group_id))
+        cur.execute("INSERT INTO students (fullname, group_id) VALUES (%s, %s) RETURNING id", (fake.name(), group_id))
         student_id = cur.fetchone()[0]
         for subject_id in range(1, 7):
             for _ in range(3):
