@@ -22,6 +22,7 @@ def insert_data(conn, sql_expression: str):
     finally:
         c.close()
 
+
 if __name__ == '__main__':
     sql_insert_data = """
         INSERT INTO users (name, email, password, age) VALUES (%s, %s, %s, %s);
