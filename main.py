@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 fake = Faker("uk_UA")
 
 
-conn = psycopg2.connect(host="localhost", database="hw6", user="postgres", password="567234")
+conn = psycopg2.connect(host="localhost", database="test", user="postgres", password="567234")
 cur = conn.cursor()
 
 for _ in range(3):
